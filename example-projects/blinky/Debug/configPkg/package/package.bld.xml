@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="configPkg" version="" producerId="undefined">
+    <units>
+    </units>
+    <sources>
+        <srcFile name="package/cfg/blinky_pm4fg.c"/>
+    </sources>
+    <configscripts>
+        <srcFile name="/home/sascha/workspace_ccs/4.2.00.35/blinky/blinky.cfg"/>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/cfg/blinky_pm4fg.mak" src="package.bld"/>
+        <srcFile name="package/cfg/blinky_pm4fg.om4fg.dep" src="package/cfg/blinky_pm4fg.c"/>
+        <srcFile name="package/cfg/blinky_pm4fg.dep" src="package/cfg/blinky_pm4fg.cfg"/>
+        <srcFile name="package/cfg/blinky.xm4fg.mak" src="package.bld"/>
+        <srcFile name="package/rel/configPkg.tar.dep" src="package/rel/configPkg.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="gnu.targets.arm.M4F"
+            version="gnu.targets.arm.M4F{1,0,9.2,1"
+            rawVersion="9.2.1"
+            platform="ti.platforms.tiva:TM4C1294NCPDT"
+            isa="v7M4"
+            suffix="m4fg"
+            rootDir="/home/sascha/ti/ccs1000/ccs/tools/compiler/gcc-arm-none-eabi-9-2019-q4-major"
+            os="undefined"
+            rts="gnu.targets.arm.rtsv7M">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    </libraries>
+    <configurations>
+    <configuration name="blinky"
+        pname="blinky.pm4fg"
+        target="gnu.targets.arm.M4F"
+        platform="ti.platforms.simplelink:CC2642R1F"
+        profile="release"
+        isPartial="false"
+        xCfgScript="package/cfg/blinky_pm4fg.cfg"
+        xCfgPrefix="package/cfg/blinky_pm4fg"
+        cfgScript="/home/sascha/workspace_ccs/4.2.00.35/blinky/blinky.cfg"
+        cfgArgs="null"
+        />
+    </configurations>
+    <executables>
+    <executable name="blinky"
+        pname="blinky.xm4fg"
+        target="gnu.targets.arm.M4F"
+        platform="ti.platforms.simplelink:CC2642R1F"
+        profile="release"
+        xCfgScript="package/cfg/blinky_pm4fg.cfg"
+        xCfgPrefix="package/cfg/blinky_pm4fg"
+        cfgScript="/home/sascha/workspace_ccs/4.2.00.35/blinky/blinky.cfg"
+        cfgArgs="null"
+        />
+    </executables>
+    <tests>
+    <test exeName="blinky.xm4fg"
+        args=""
+        groupName="blinky.xm4fg"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs=""
+        />
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="configPkg"
+        pname="configPkg.tar"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

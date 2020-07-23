@@ -1,0 +1,24 @@
+/* THIS IS A GENERATED FILE -- DO NOT EDIT */
+
+var target;    /* the target used for this build */
+
+/* configuro was passed the target's name explicitly */
+try {
+    target = xdc.module('gnu.targets.arm.M4F');
+}
+catch (e) {
+    throw new Error("Can't find the target named '" + 'gnu.targets.arm.M4F'
+                    + "' along the path '" + environment["xdc.path"]
+                    + "': please check the spelling of the target's name and that it exists along this path.");
+}
+if (!(target instanceof xdc.module("xdc.bld.ITarget").Module)) {
+    throw new Error("The module named 'gnu.targets.arm.M4F' exists but it's not a target: please check the spelling of the target's name");
+}
+
+/* configuro was passed compiler options explicitly */
+target.ccOpts.prefix = unescape("-mcpu%3Dcortex-m4%20-march%3Darmv7e-m%20-mthumb%20-mfloat-abi%3Dhard%20-mfpu%3Dfpv4-sp-d16%20-DDeviceFamily_CC26X2%20-I%22/home/sascha/workspace_ccs/4.2.00.35/blinky%22%20-I%22/home/sascha/workspace_ccs/4.2.00.35/blinky/Debug%22%20-I%22/home/sascha/ti/simplelink_cc13x2_26x2_sdk_4_20_00_35/source%22%20-I%22/home/sascha/ti/simplelink_cc13x2_26x2_sdk_4_20_00_35/source/ti/posix/gcc%22%20-I%22/home/sascha/ti/simplelink_cc13x2_26x2_sdk_4_20_00_35/kernel/tirtos/packages/gnu/targets/arm/libs/install-native/arm-none-eabi/include/newlib-nano%22%20-I%22/home/sascha/ti/simplelink_cc13x2_26x2_sdk_4_20_00_35/kernel/tirtos/packages/gnu/targets/arm/libs/install-native/arm-none-eabi/include%22%20-I%22/home/sascha/ti/ccs1000/ccs/tools/compiler/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include%22%20-ffunction-sections%20-fdata-sections%20-g%20-gdwarf-3%20-gstrict-dwarf%20-Wall%20%20-std%3Dc99%20%20") + target.ccOpts.prefix;
+
+/* configuro was passed the target's rootDir explicitly */
+target.rootDir = '/home/sascha/ti/ccs1000/ccs/tools/compiler/gcc-arm-none-eabi-9-2019-q4-major';
+
+Build.targets = [target];
