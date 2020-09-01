@@ -59,6 +59,7 @@ nav:
   - Home: index.md
   - Projects:
     - Overview: projects/projects.md
+    - Lab blog: lab-log/index.md
     - CC2652R stick: projects/cc2652.md
     - IKEA Bekant controller: projects/ikea_table.md
   - About me: about_me.md
