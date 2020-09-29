@@ -5,8 +5,6 @@ import getopt
 import glob
 import time
 import os
-import struct
-import binascii
 import traceback
 
 # version
