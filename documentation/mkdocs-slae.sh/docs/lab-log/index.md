@@ -1,3 +1,26 @@
+# 07. Sep' 2020
+
+Nearly all open orders are done! Thanks to all of you for your patience and support!
+
+Preparing the stock again: Another batch of antennas just arrived..
+
+![new antennas](../images/new_antennas1.jpg){width=200px}
+![new antennas](../images/new_antennas2.jpg){width=200px}
+
+# 05. Sep' 2020
+
+Yesterdays batch was picked up, just preparing the next..!
+
+![preparation](../images/preparing_the_next_batch.jpg){width=200px}
+
+Will spend another hour in the post office later on.. :D
+
+# 04. Sep' 2020
+
+Another batch is getting picked up! We are good on track.. ;)
+
+![batch of parcels](../images/2_batches_picked_up.jpg){width=200px}
+
 # 02. Sep' 2020
 
 Got many many new and much better envelopes today! The night can start.. Printing, packing and glueing all night long..
