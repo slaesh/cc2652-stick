@@ -27,6 +27,7 @@ def mdebug(level, message, attr='\n'):
     if QUIET >= level:
         print(message, end=attr, file=sys.stderr)
 
+
 RETURN_CMD_STRS = {0x40: 'Success',
                    0x41: 'Unknown command',
                    0x42: 'Invalid command',
@@ -61,20 +62,21 @@ class CommandInterface(object):
         # this stage: We need to set its attributes up depending on what object
         # we get.
         try:
-            self.sp = serial.serial_for_url(aport, do_not_open=True, timeout=10)
+            self.sp = serial.serial_for_url(
+                aport, do_not_open=True, timeout=10)
         except AttributeError:
             self.sp = serial.Serial(port=None, timeout=10)
             self.sp.port = aport
 
-        if ((os.name == 'nt' and isinstance(self.sp, serial.serialwin32.Serial)) or \
-           (os.name == 'posix' and isinstance(self.sp, serial.serialposix.Serial))):
-            self.sp.baudrate=abaudrate        # baudrate
-            self.sp.bytesize=8                # number of databits
-            self.sp.parity=serial.PARITY_NONE # parity
-            self.sp.stopbits=1                # stop bits
-            self.sp.xonxoff=0                 # s/w (XON/XOFF) flow control
-            self.sp.rtscts=0                  # h/w (RTS/CTS) flow control
-            self.sp.timeout=0.5               # set the timeout value
+        if ((os.name == 'nt' and isinstance(self.sp, serial.serialwin32.Serial)) or
+                (os.name == 'posix' and isinstance(self.sp, serial.serialposix.Serial))):
+            self.sp.baudrate = abaudrate        # baudrate
+            self.sp.bytesize = 8                # number of databits
+            self.sp.parity = serial.PARITY_NONE  # parity
+            self.sp.stopbits = 1                # stop bits
+            self.sp.xonxoff = 0                 # s/w (XON/XOFF) flow control
+            self.sp.rtscts = 0                  # h/w (RTS/CTS) flow control
+            self.sp.timeout = 0.5               # set the timeout value
 
         self.sp.open()
 
@@ -122,7 +124,7 @@ class CommandInterface(object):
             set_bootloader_pin = self.sp.setDTR
             set_reset_pin = self.sp.setRTS
 
-        set_bootloader_pin(0 if not dtr_active_high else 1) # normal operation
+        set_bootloader_pin(0 if not dtr_active_high else 1)  # normal operation
         set_reset_pin(0)
         set_reset_pin(1)
         set_reset_pin(0)
@@ -232,7 +234,69 @@ class CommandInterface(object):
             else:
                 raise CmdException("GetChipID (0x28) failed")
 
+    '''
+    zigbee-herdsman:adapter:zStack:znp:log Serialport opened +113ms
+    zigbee-herdsman:adapter:zStack:unpi:parser <-- [0] +0ms
+    zigbee-herdsman:adapter:zStack:unpi:parser --- parseNext [0] +1ms
+    zigbee-herdsman:adapter:zStack:unpi:parser <-- [0] +302ms
+    zigbee-herdsman:adapter:zStack:unpi:parser --- parseNext [0,0] +0ms
+    zigbee-herdsman:adapter:zStack:znp:log Writing skip bootloader payload +457ms
+    zigbee-herdsman:adapter:zStack:unpi:writer --> buffer [239] +0ms
+    zigbee-herdsman:adapter:zStack:znp:SREQ --> SYS - ping - {"capabilities":1} +0ms
+    zigbee-herdsman:adapter:zStack:unpi:writer --> frame [254,0,33,1,32] +1s
+    zigbee-herdsman:adapter:zStack:unpi:parser <-- [254,6,65,128,0,2,1,2,7,1,192] +2s
+    zigbee-herdsman:adapter:zStack:unpi:parser --- parseNext [0,0,254,6,65,128,0,2,1,2,7,1,192] +0ms
+    zigbee-herdsman:adapter:zStack:unpi:parser --> parsed 6 - 2 - 1 - 128 - [0,2,1,2,7,1] - 192 +1ms
+    zigbee-herdsman:adapter:zStack:znp:AREQ <-- SYS - resetInd - {"reason":0,"transportrev":2,"productid":1,"majorrel":2,"minorrel":7,"hwrev":1} +0ms
+    zigbee-herdsman:adapter:zStack:unpi:parser --- parseNext [] +5ms
+    zigbee-herdsman:adapter:zStack:znp:SREQ --> SYS - ping - {"capabilities":1} +6s
+    zigbee-herdsman:adapter:zStack:unpi:writer --> frame [254,0,33,1,32] +6s
+    zigbee-herdsman:adapter:zStack:unpi:parser <-- [254,2,97,1,89,6,61] +5s
+    zigbee-herdsman:adapter:zStack:unpi:parser --- parseNext [254,2,97,1,89,6,61] +0ms
+    zigbee-herdsman:adapter:zStack:unpi:parser --> parsed 2 - 3 - 1 - 1 - [89,6] - 61 +1ms
+    zigbee-herdsman:adapter:zStack:znp:SRSP <-- SYS - ping - {"capabilities":1625} +0ms
+    zigbee-herdsman:adapter:zStack:unpi:parser --- parseNext [] +1ms
+    zigbee-herdsman:adapter:zStack:znp:SREQ --> SYS - version - {} +7ms
+    zigbee-herdsman:adapter:zStack:unpi:writer --> frame [254,0,33,2,35] +7ms <<<<<<< !!
+    zigbee-herdsman:adapter:zStack:unpi:parser <-- [254,14,97,2,2,1,2,7,1,221,61,52,1,0,255,255,255,255,191] +6ms
+    zigbee-herdsman:adapter:zStack:unpi:parser --- parseNext [254,14,97,2,2,1,2,7,1,221,61,52,1,0,255,255,255,255,191] +0ms
+    zigbee-herdsman:adapter:zStack:unpi:parser --> parsed 14 - 3 - 1 - 2 - [2,1,2,7,1,221,61,52,1,0,255,255,255,255] - 191 +1ms
+    zigbee-herdsman:adapter:zStack:znp:SRSP <-- SYS - version - {"transportrev":2,"product":1,"majorrel":2,"minorrel":7,"maintrel":1,"revision":20200925} +9ms
+    zigbee-herdsman:adapter:zStack:unpi:parser --- parseNext [] +1ms
+    zigbee-herdsman:adapter:zStack:adapter Adapter concurrent: 16 +0ms
+    zigbee-herdsman:adapter:zStack:adapter Detected znp version 'zStack3x0' ({"transportrev":2,"product":1,"majorrel":2,"minorrel":7,"maintrel":1,"revision":20200925}) +0ms
+    '''
+
     def cmdReadFwVersion(self):
+        time.sleep(1.5)
+        got = self._read(40)
+        mdebug(10, "*** received %d" % (len(got)))
+        idx = 0
+        for b in got:
+            mdebug(10, "---> %02d: %02x (%d)" % (idx, b, b))
+            idx += 1
+
+        got = self._read(40)
+        mdebug(10, "*** received %d" % (len(got)))
+        idx = 0
+        for b in got:
+            mdebug(10, "---> %02d: %02x (%d)" % (idx, b, b))
+            idx += 1
+
+        got = self._read(40)
+        mdebug(10, "*** received %d" % (len(got)))
+        idx = 0
+        for b in got:
+            mdebug(10, "---> %02d: %02x (%d)" % (idx, b, b))
+            idx += 1
+
+        got = self._read(40)
+        mdebug(10, "*** received %d" % (len(got)))
+        idx = 0
+        for b in got:
+            mdebug(10, "---> %02d: %02x (%d)" % (idx, b, b))
+            idx += 1
+
         # send a version request
         self._write(254)
         self._write(0)
@@ -240,41 +304,8 @@ class CommandInterface(object):
         self._write(2)
         self._write(35)
 
-#---> 00: 00 (0)
-#---> 01: fe (254) => PING starts here
-#---> 02: 06 (6)
-#---> 03: 41 (65)
-#---> 04: 80 (128)
-#---> 05: 00 (0)
-#---> 06: 02 (2)
-#---> 07: 01 (1)
-#---> 08: 02 (2)
-#---> 09: 07 (7)
-#---> 10: 01 (1)
-#---> 11: c0 (192)
-#---> 12: fe (254) => VERSION starts here
-#---> 13: 0e (14)
-#---> 14: 61 (97)
-#---> 15: 02 (2)
-#---> 16: 02 (2)
-#---> 17: 01 (1)
-#---> 18: 02 (2)
-#---> 19: 07 (7)
-#---> 20: 01 (1)
-#---> 21: 7e (126)
-#---> 22: 3d (61)
-#---> 23: 34 (52)
-#---> 24: 01 (1)
-#---> 25: 00 (0)
-#---> 26: ff (255)
-#---> 27: ff (255)
-#---> 28: ff (255)
-#---> 29: ff (255)
-#---> 30: 1c (28)
-#received 31
-
         mdebug(10, "*** ReadFwVersion cmd")
-        
+
         got = self._read(40)
 
         idx = 0
@@ -283,35 +314,39 @@ class CommandInterface(object):
             idx += 1
 
         mdebug(10, "*** received %d" % (len(got)))
-        
-        if len(got) < 30:
+
+        if len(got) < 19:
+            idx = 0
+            for b in got:
+                mdebug(5, "---> %02d: %02x (%d)" % (idx, b, b))
+                idx += 1
+
+            mdebug(5, "*** received %d" % (len(got)))
+            
             raise CmdException("to small")
 
-        if got[1] != 254 | got[2] != 6:
-            raise CmdException("no PING first?")
-
-        if got[12] != 254 | got[13] != 14:
+        if got[0] != 254 | got[1] != 14:
             raise CmdException("no version!")
 
-        fw_ver = got[24]
+        fw_ver = got[12]
         fw_ver <<= 8
-        fw_ver |= got[23]
+        fw_ver |= got[11]
         fw_ver <<= 8
-        fw_ver |= got[22]
+        fw_ver |= got[10]
         fw_ver <<= 8
-        fw_ver |= got[21]
+        fw_ver |= got[9]
 
         mdebug(5, "--> ZigBee coordinator is working!")
         mdebug(5, "`---> transportrev %d, product %d, majorrel %d, minorrel %d, maintrel %d, revision: %d" % (
-            got[16],
-            got[17],
-            got[18],
-            got[19],
-            got[20],
+            got[4],
+            got[5],
+            got[6],
+            got[7],
+            got[8],
             fw_ver
-         ))
+        ))
 
-        ## just try to read more..
+        # just try to read more..
 
         got = self._read(4)
 
@@ -319,7 +354,6 @@ class CommandInterface(object):
             mdebug(10, "---> %x" % b)
 
         mdebug(10, "*** received %x" % (len(got)))
-        
 
     def sendSynch(self):
         cmd = 0x55
@@ -400,21 +434,22 @@ def usage():
 
     """ % (sys.argv[0], sys.argv[0], sys.argv[0]))
 
+
 if __name__ == "__main__":
 
     conf = {
-            'port': 'auto',
-            'baud': 115200,
-            'bootloader_active_high': False,
-            'bootloader_invert_lines': False,
-        }
+        'port': 'auto',
+        'baud': 115200,
+        'bootloader_active_high': False,
+        'bootloader_invert_lines': False,
+    }
 
 # http://www.python.org/doc/2.5.2/lib/module-getopt.html
 
     try:
         opts, args = getopt.getopt(sys.argv[1:],
                                    "h:wvp:b",
-                                   ['help', 
+                                   ['help',
                                     'bootloader-active-high',
                                     'bootloader-invert-lines', 'version'])
     except getopt.GetoptError as err:
@@ -450,13 +485,13 @@ if __name__ == "__main__":
             ports.extend(glob.glob('/dev/serial/by-id/*'))
 
             for p in ports:
-                  if ("slae.sh" in p) & ("cc2652rb_stick" in p):
-                      conf['port'] = p
+                if ("slae.sh" in p) & ("cc2652rb_stick" in p):
+                    conf['port'] = p
 
-                  mdebug(10, "> %s" % p)
+                mdebug(10, "> %s" % p)
 
             if conf['port'] == 'auto':
-               raise CmdException("Stick was not automatically found!")
+                raise CmdException("Stick was not automatically found!")
 
         cmd = CommandInterface()
         cmd.open(conf['port'], conf['baud'])
@@ -464,7 +499,7 @@ if __name__ == "__main__":
                               conf['bootloader_invert_lines'])
         mdebug(5, "Opening port %(port)s, baud %(baud)d\n"
                % {'port': conf['port'], 'baud': conf['baud']})
-        
+
         if not cmd.sendSynch():
             raise CmdException("Can't connect to target. Ensure boot loader "
                                "is started. (no answer on synch sequence)")
@@ -474,9 +509,12 @@ if __name__ == "__main__":
         mdebug(5, "--> Bootloader is working!")
 
         cmd.skip_bootloader(conf['bootloader_active_high'],
-                              conf['bootloader_invert_lines'])
+                            conf['bootloader_invert_lines'])
 
-        cmd.cmdReadFwVersion()
+        try:
+            cmd.cmdReadFwVersion()
+        except:
+            cmd.cmdReadFwVersion()
 
         mdebug(5, "\nCheck done!")
 
