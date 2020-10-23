@@ -448,7 +448,7 @@ if __name__ == "__main__":
 
     try:
         opts, args = getopt.getopt(sys.argv[1:],
-                                   "h:wvp:b",
+                                   "h:wvp:b:",
                                    ['help',
                                     'bootloader-active-high',
                                     'bootloader-invert-lines', 'version'])
@@ -485,7 +485,7 @@ if __name__ == "__main__":
             ports.extend(glob.glob('/dev/serial/by-id/*'))
 
             for p in ports:
-                if ("slae.sh" in p) & ("cc2652rb_stick" in p):
+                if ("slae.sh" in p) & ("cc2652rb" in p):
                     conf['port'] = p
 
                 mdebug(10, "> %s" % p)
