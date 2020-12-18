@@ -269,40 +269,82 @@
     <div
       id="snipcart"
       data-config-modal-style="side"
-      data-currency="eur"
       data-api-key="NTMxNTU0OTYtNjAxOC00YjdkLTg4YmEtMjY5MjI2MTNhNzUzNjM3NDA1MjI4Mjg2NTQ1Nzk0"
       hidden>
     </div>
 
     <script>
+      const LOCALSTORAGE_CURRENCY_KEY = 'snipcart-current-currency';
+
+      window.getCurrentCurrency = (fallback) => {
+        let curCurrency = '';
+
+        try {
+          if (document.querySelector('.snipcart-total-price').innerText.includes('$')) {
+            curCurrency = 'usd';
+          }
+          else if (document.querySelector('.snipcart-total-price').innerText.includes('€')) {
+            curCurrency = 'eur';
+          }
+        } catch (error) {
+          console.log('could not get our current currency..', error);
+        }
+
+        return curCurrency || fallback || 'eur';
+      };
+
+      window.displayCurrency = (currency) => {
+        const currencyTxt = `currency: ${currency.toUpperCase()}<br />click to change`;
+        document.querySelector('#cur-currency').innerHTML = currencyTxt;    
+      };
+
       window.switchCurrency = (currency) => {
-        if (!currency || !currency.toLowerCase) {
-          // just toggle..
-          if (window.currentCurrency == 'usd') {
-            currency = 'eur';
+        const currentCurrency = window.getCurrentCurrency();
+
+        try {
+          if (!currency || !currency.toLowerCase) {
+            // just toggle..
+            if (currentCurrency == 'usd') {
+              currency = 'eur';
+            }
+            else {
+              currency = 'usd';
+            }
           }
-          else {
-            currency = 'usd';
+
+          currency = currency.toLowerCase();
+
+          if (window.getCurrentCurrency() != currency) {
+            try {
+              window.localStorage.setItem(LOCALSTORAGE_CURRENCY_KEY, currency);
+            } catch (error) {
+            console.log('could not set our current currency..', error);
+            }
+
+            const validCurrencies = ['usd', 'eur'];
+            if (!validCurrencies.includes(currency)) {
+              return console.log('invalid currency!', currency);
+            }
+
+            Snipcart.api.session.setCurrency(currency);
           }
+
+          window.displayCurrency(currency);
+        } catch (error) {
+          console.log(error);
         }
-
-        currency = currency.toLowerCase();
-
-        const validCurrencies = ['usd', 'eur'];
-        if (!validCurrencies.includes(currency)) {
-          return console.log('invalid currency!', currency);
-        }
-
-        window.currentCurrency = currency;
-        Snipcart.api.session.setCurrency(window.currentCurrency);
-
-        const currencyTxt = `currency: ${window.currentCurrency.toUpperCase()}<br />click to change`;
-        document.querySelector('#cur-currency').innerHTML = currencyTxt;
-      }
+      };
 
       setTimeout(() => {
-        window.switchCurrency('eur');
-      }, 1000);
+        const curCurrency = window.getCurrentCurrency('eur');
+        console.log('current currency..', curCurrency);
+
+        // do not switch every time..
+        //window.switchCurrency(curCurrency);
+
+        // just display it..
+        window.displayCurrency(curCurrency);
+      }, 2000);
     </script>
 
   </body>
