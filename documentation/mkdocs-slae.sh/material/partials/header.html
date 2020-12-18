@@ -1,0 +1,61 @@
+{#-
+  This file was automatically generated - do not edit
+-#}
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="{{ lang.t('header.title') }}">
+    <a href="{{ config.site_url | default(nav.homepage.url, true) | url }}" title="{{ config.site_name }}" class="md-header-nav__button md-logo" aria-label="{{ config.site_name }}">
+      {% include "partials/logo.html" %}
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      {% include ".icons/material/menu" ~ ".svg" %}
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      {% if config.site_name == page.title %}
+        <div class="md-header-nav__ellipsis md-ellipsis">
+          {{ config.site_name }}
+        </div>
+      {% else %}
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            {{ config.site_name }}
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            {% if page and page.meta and page.meta.title %}
+              {{ page.meta.title }}
+            {% else %}
+              {{ page.title }}
+            {% endif %}
+          </span>
+        </div>
+      {% endif %}
+    </div>
+    {% if "search" in config["plugins"] %}
+      <label class="md-header-nav__button md-icon" for="__search">
+        {% include ".icons/material/magnify.svg" %}
+      </label>
+      {% include "partials/search.html" %}
+    {% endif %}
+    {% if config.repo_url %}
+      <div class="md-header-nav__source">
+        {% include "partials/source.html" %}
+      </div>
+    {% endif %}
+    <!-- snipcart infos-->
+    <div id="cur-currency" onclick="window.switchCurrency()"></div>
+    <div class="snipcart-checkout snipcart-checkout__info">
+      <br />
+      <span>Items:</span><span class="snipcart-items-count"></span>
+      <br />
+      <span>Amount:</span><span class="snipcart-total-price"></span>
+    </div>
+    <div class="snipcart-checkout snipcart-checkout__button">
+      Checkout!
+    </div>
+    <!-- my tindie button
+    <a href="https://www.tindie.com/stores/slaesh/?ref=offsite_badges&utm_source=sellers_slaesh&utm_medium=badges&utm_campaign=badge_medium"><img style="max-height: 50px;" src="https://d2ss6ovg47m0r5.cloudfront.net/badges/tindie-mediums.png" alt="I sell on Tindie" width="125" height="50"></a>
+     -->
+    <!-- my patreon button
+    <a href="https://www.patreon.com/bePatron?u=36073709" data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+     -->
+  </nav>
+</header>
