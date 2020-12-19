@@ -267,6 +267,14 @@ class CommandInterface(object):
     zigbee-herdsman:adapter:zStack:adapter Detected znp version 'zStack3x0' ({"transportrev":2,"product":1,"majorrel":2,"minorrel":7,"maintrel":1,"revision":20200925}) +0ms
     '''
 
+    '''
+    zigbee-herdsman:adapter:zStack:unpi:writer --> frame [254,0,33,2,35] +27ms
+    zigbee-herdsman:adapter:zStack:unpi:parser <-- [254,10,97,2,2,1,2,7,1,66,62,52,1,0,39] +20ms
+    zigbee-herdsman:adapter:zStack:unpi:parser --- parseNext [254,10,97,2,2,1,2,7,1,66,62,52,1,0,39] +0ms
+    zigbee-herdsman:adapter:zStack:unpi:parser --> parsed 10 - 3 - 1 - 2 - [2,1,2,7,1,66,62,52,1,0] - 39 +0ms
+    zigbee-herdsman:adapter:zStack:znp:SRSP <-- SYS - version - {"transportrev":2,"product":1,"majorrel":2,"minorrel":7,"maintrel":1,"revision":20201026} +21ms
+    '''
+
     def cmdReadFwVersion(self):
         time.sleep(1.5)
         got = self._read(40)
@@ -308,25 +316,20 @@ class CommandInterface(object):
 
         got = self._read(40)
 
-        idx = 0
-        for b in got:
-            mdebug(10, "---> %02d: %02x (%d)" % (idx, b, b))
-            idx += 1
-
         mdebug(10, "*** received %d" % (len(got)))
 
-        if len(got) < 19:
+        if len(got) < 15:
             idx = 0
             for b in got:
-                mdebug(5, "---> %02d: %02x (%d)" % (idx, b, b))
+                mdebug(10, "---> %02d: %02x (%d)" % (idx, b, b))
                 idx += 1
 
-            mdebug(5, "*** received %d" % (len(got)))
+            mdebug(10, "*** received %d" % (len(got)))
             
             raise CmdException("to small")
 
-        if got[0] != 254 | got[1] != 14:
-            raise CmdException("no version!")
+        if got[0] != 254:
+            raise CmdException("invalid response?")
 
         fw_ver = got[12]
         fw_ver <<= 8
@@ -448,12 +451,13 @@ if __name__ == "__main__":
 
     try:
         opts, args = getopt.getopt(sys.argv[1:],
-                                   "h:wvp:b:",
+                                   "h:wp:b:",
                                    ['help',
                                     'bootloader-active-high',
                                     'bootloader-invert-lines', 'version'])
     except getopt.GetoptError as err:
         # print help information and exit:
+        print('ERROR PARSING ARGUMENTS')
         print(str(err))  # will print something like "option -a not recognized"
         usage()
         sys.exit(2)
