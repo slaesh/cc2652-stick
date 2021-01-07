@@ -1,3 +1,25 @@
+# Jan' 2021
+
+A happy new year to all! :)
+
+We are proud of our new "webshop", which is working fine so far. (If not, please send us your feedback)
+Still needs some tweaks.. Facelift would be very cool.. But.. Yeah.. It works for now? :D
+What has to be improved and will be.. Payment.. We want different options! Keep you updated ;)
+
+Another thing.. We are trying to publish some cool projects realized with our stick..
+First is the [BME680 air quality sensor](/projects/bme680/) ..
+Which will follow..
+
+- Light sensor
+- BME280 temperature and humidity sensor
+- movement sensor
+- AC relay
+- light switch
+- ..
+
+Any ideas? Something cool you ever wanted to see?
+Just mail us.. ;)
+
 # 08. Nov' 2020
 
 I was invited to join this (the last) week a hackathon! It was so fun!
