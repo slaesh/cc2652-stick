@@ -1,0 +1,13 @@
+version: "3"
+services:
+  coordinator-test:
+    container_name: coordinator-test
+    #image: slaesh/coordinator-test
+    build: .
+    devices:
+      - /dev/serial/by-id/usb-Silicon_Labs_slae.sh_cc2652rb_stick_-_slaesh_s_iot_stuff_00_12_4B_00_21_CC_43_2D-if00-port0:/dev/ttyUSB1
+    #restart: always
+    network_mode: host
+    privileged: true
+    environment:
+      - TZ=Europe/Stockholm
