@@ -263,22 +263,31 @@
 
     <!-- Test MDAzOTUzNTItOTZhOC00MTNhLWE2YjgtYjZmNDY1MDNjMjdjNjM3NDA1MjI4Mjg2NTQ1Nzk0 -->
     <!-- Live NTMxNTU0OTYtNjAxOC00YjdkLTg4YmEtMjY5MjI2MTNhNzUzNjM3NDA1MjI4Mjg2NTQ1Nzk0 -->
+
+    <!-- data-config-modal-style="side" -->
     <div
       id="snipcart"
-      data-config-modal-style="side"
       data-api-key="NTMxNTU0OTYtNjAxOC00YjdkLTg4YmEtMjY5MjI2MTNhNzUzNjM3NDA1MjI4Mjg2NTQ1Nzk0"
       hidden>
 
     <billing section="bottom">
       <fieldset class="snipcart-form__set">
-          <div class="snipcart-form__field">
-              <div class="snipcart-form__field-checkbox">
-                  <snipcart-checkbox name="subscribeToNewsletter"></snipcart-checkbox>
-                  <snipcart-label class="snipcart__font--tiny snipcart-form__label--checkbox" for="subscribeToNewsletter">
-                      Subscribe to newsletter (no spam, really rare, unperiodic)
-                  </snipcart-label>
-              </div>
-          </div>
+
+        <div class="snipcart-form__field">
+          <snipcart-label class="snipcart__font--tiny" for="vatNumber">
+              VAT Number
+          </snipcart-label>
+          <snipcart-input name="vatNumber"></snipcart-input>
+        </div>
+
+        <div class="snipcart-form__field">
+            <div class="snipcart-form__field-checkbox">
+                <snipcart-checkbox name="subscribeToNewsletter"></snipcart-checkbox>
+                <snipcart-label class="snipcart__font--tiny snipcart-form__label--checkbox" for="subscribeToNewsletter">
+                    Subscribe to newsletter (no spam, really rare, unperiodic)
+                </snipcart-label>
+            </div>
+        </div>
       </fieldset>
     </billing>
 
