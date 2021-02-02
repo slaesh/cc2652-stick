@@ -83,7 +83,7 @@
     <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.27/default/snipcart.css" />
     
     <style>
-      .snipcart-add-item {
+      .cta__button {
         background-color: darkorange;
         border-radius: 8px;
         color: white;
@@ -93,6 +93,20 @@
         display: inline-block;
         font-size: 16px;
         cursor: pointer;
+      }
+
+      .cta__button--disabled {
+        background-color: darkgray;
+        cursor: not-allowed;
+      }
+
+      #waitinglist_emailinput {
+        line-height: 40px;
+        font-size: 24px;
+        border-color: darkgray;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 4px;
       }
 
       .snipcart-checkout__button {
@@ -314,6 +328,41 @@
     </div>
    
     <script>
+      function joinWatchlist() {
+        console.log('join!!! =)');
+
+        const thisBtn = document.querySelector('#join_waitinglist');
+        const wtlInpt = document.querySelector('#waitinglist_emailinput');
+
+        if (!thisBtn || !wtlInpt) return;
+
+        const email = wtlInpt.value;
+        if (!email) return;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", 'https://cors-anywhere.herokuapp.com/http://srv.slae.sh:6789/join-watchlist', true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                thisBtn.classList.add('cta__button--disabled');
+                window.alert("Thanks!!");
+            } else if (xhr.readyState === XMLHttpRequest.DONE) {
+              window.alert("Sad! Something went wrong.. =/");
+
+              thisBtn.removeAttribute("disabled");
+              wtlInpt.removeAttribute("disabled");
+            }
+        }
+
+        xhr.send(JSON.stringify({email}));
+
+        thisBtn.setAttribute("disabled", true);
+        wtlInpt.setAttribute("disabled", true);
+      }
+    </script>
+
+    <script>
       const LOCALSTORAGE_CURRENCY_KEY = 'snipcart-current-currency';
 
       window.getCurrentCurrency = (fallback) => {
@@ -378,9 +427,6 @@
       setTimeout(() => {
         const curCurrency = window.getCurrentCurrency('eur');
         console.log('current currency..', curCurrency);
-
-        // do not switch every time..
-        //window.switchCurrency(curCurrency);
 
         // just display it..
         window.displayCurrency(curCurrency);

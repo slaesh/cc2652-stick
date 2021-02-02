@@ -1,3 +1,11 @@
+# 27. Jan' 2021
+
+Finally we got a router firmware!! =))
+
+https://github.com/Koenkk/Z-Stack-firmware/tree/develop/router/Z-Stack_3.x.0/bin
+
+Use the CC2652RB* zip file ;)
+
 # Jan' 2021
 
 A happy new year to all! :)
