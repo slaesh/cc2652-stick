@@ -383,8 +383,26 @@
       };
 
       window.displayCurrency = (currency) => {
+        if (!currency) return;
+
         const currencyTxt = `currency: ${currency.toUpperCase()}<br />click to change`;
         document.querySelector('#cur-currency').innerHTML = currencyTxt;    
+        
+        const buyBtn = document.querySelector('#buy_button');
+        if (!buyBtn) return;
+
+        try {
+          const prices = JSON.parse(buyBtn.attributes['data-item-price'].value);
+          if (currency === "usd") {
+            buyBtn.innerText = `Just click here: \$${prices.usd}`;
+          }
+          else {
+            buyBtn.innerText = `Just click here: ${prices.usd}€`;
+          }
+        }
+        catch(err) {
+          console.warn(err);
+        }
       };
 
       window.switchCurrency = (currency) => {
