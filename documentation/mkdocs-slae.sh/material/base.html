@@ -340,8 +340,9 @@
         if (!email) return;
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", 'https://cors-anywhere.herokuapp.com/http://srv.slae.sh:6789/join-watchlist', true);
+        xhr.open("POST", 'https://srv.slae.sh:6790/join-watchlist', true);
         xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
 
         xhr.onreadystatechange = () => {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
@@ -393,11 +394,12 @@
 
         try {
           const prices = JSON.parse(buyBtn.attributes['data-item-price'].value);
+          console.log(prices);
           if (currency === "usd") {
             buyBtn.innerText = `Just click here: \$${prices.usd}`;
           }
           else {
-            buyBtn.innerText = `Just click here: ${prices.usd}€`;
+            buyBtn.innerText = `Just click here: ${prices.eur}€`;
           }
         }
         catch(err) {

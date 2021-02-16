@@ -1,4 +1,4 @@
-# BME680 Airquality sensor
+# the SAMY project ! :D
 
 ![freecad samy](../images/freecad_samy.png)
 
@@ -56,3 +56,7 @@ with just three controls:
  - color
  - border
  - on/off
+
+the result:
+
+![samy](../images/samy_off.jpg)
