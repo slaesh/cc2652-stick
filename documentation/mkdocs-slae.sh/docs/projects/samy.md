@@ -60,3 +60,11 @@ with just three controls:
 the result:
 
 ![samy](../images/samy_off.jpg)
+
+Runner test:
+
+<div style="width:100%;height:560px;background-color:black;text-align:center;">
+   <iframe height="100%" width="100%"
+      src="https://www.youtube.com/embed/HwiMHECqP7Q?autoplay=1&mute=1&controls=0&loop=1&playlist=HwiMHECqP7Q">
+   </iframe>
+</div>

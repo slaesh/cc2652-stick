@@ -284,6 +284,101 @@
       data-api-key="NTMxNTU0OTYtNjAxOC00YjdkLTg4YmEtMjY5MjI2MTNhNzUzNjM3NDA1MjI4Mjg2NTQ1Nzk0"
       hidden>
 
+    <address-fields>
+      <div>
+        <div>
+            <snipcart-label for="phone">
+                Phone number (only used for delivery)
+            </snipcart-label>
+            <snipcart-input name="phone">
+            </snipcart-input>
+        </div>
+
+        <fieldset class="snipcart-form__set">
+          <div class="snipcart-form__row">
+          </div>
+          
+          <div class="snipcart-form__row">
+            <div class="snipcart-form__field snipcart-form__cell--large">
+              <snipcart-label
+                class="snipcart__font--tiny"
+                for="company"
+              >company</snipcart-label>
+              <snipcart-input name="company"></snipcart-input>
+              <snipcart-error-message name="company"></snipcart-error-message>
+            </div>
+          </div>
+  
+          <div class="snipcart-form__field">
+            <snipcart-label
+              class="snipcart__font--tiny"
+              for="country"
+            >country</snipcart-label>
+            <snipcart-typeahead type="dropdown" name="country" autocomplete="country"></snipcart-typeahead>
+          </div>
+          
+          <div class="snipcart-form__row">
+            <div class="snipcart-form__field snipcart-form__cell--tidy">
+              <snipcart-label
+                class="snipcart__font--tiny"
+                for="postalCode"
+              >postal code</snipcart-label>
+              <snipcart-input name="postalCode"></snipcart-input>
+              <snipcart-error-message name="postalCode"></snipcart-error-message>
+            </div>
+  
+            <div class="snipcart-form__field snipcart-form__cell--large">
+              <snipcart-label
+                class="snipcart__font--tiny"
+                for="city"
+              >city</snipcart-label>
+              <snipcart-input name="city"></snipcart-input>
+              <snipcart-error-message name="city"></snipcart-error-message>
+            </div>
+          </div>
+  
+          <div class="snipcart-form__field snipcart-form__cell--large">
+            <snipcart-label
+                            class="snipcart__font--tiny"
+                            for="province"
+                            >province/state</snipcart-label>
+            <snipcart-typeahead type="dropdown" name="province" autocomplete="province state"></snipcart-typeahead>
+          </div>
+  
+          <div class="snipcart-form__row">
+            <div class="snipcart-form__field snipcart-form__cell--large">
+              <snipcart-label
+                class="snipcart__font--tiny"
+                for="address1"
+              >street</snipcart-label>
+              <snipcart-input name="address1"></snipcart-input>
+              <snipcart-error-message name="address1"></snipcart-error-message>
+            </div>
+  
+            <div class="snipcart-form__field snipcart-form__cell--tidy">
+              <snipcart-label
+                class="snipcart__font--tiny"
+                for="address2"
+              >building number/name</snipcart-label>
+              <snipcart-input name="address2"></snipcart-input>
+              <snipcart-error-message name="address2"></snipcart-error-message>
+            </div>
+          </div>
+  
+          <div class="snipcart-form__row">
+            <div class="snipcart-form__field snipcart-form__cell--large">
+              <snipcart-label
+                class="snipcart__font--tiny"
+                for="add_addr_infos"
+              >additional infos (floor, apartment, .. whatever helps!)</snipcart-label>
+              <snipcart-input name="add_addr_infos"></snipcart-input>
+              <snipcart-error-message name="add_addr_infos"></snipcart-error-message>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </address-fields>
+
     <billing section="bottom">
       <fieldset class="snipcart-form__set">
 
@@ -305,18 +400,6 @@
       </fieldset>
     </billing>
 
-    <address-fields section="top">
-      <div>
-          <snipcart-label for="phone">
-              Phone number (only used for delivery)
-          </snipcart-label>
-          <snipcart-input name="phone">
-          </snipcart-input>
-          <br />
-          <p>Please take care that your building number is present! :)</p>
-      </div>
-  </address-fields>
-
     <payment section="top">
       <div>
           <p>
@@ -324,7 +407,7 @@
               <snipcart-label for="privacy-policy">I have read and agree to the&nbsp;<a href="#">Privacy Policy</a></snipcart-label>
           </p>
       </div>
-  </payment>
+    </payment>
     </div>
    
     <script>

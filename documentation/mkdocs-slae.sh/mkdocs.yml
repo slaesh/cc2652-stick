@@ -62,6 +62,7 @@ nav:
     - Lab blog: lab-log/index.md
     - CC2652R stick: projects/cc2652.md
     - BME680 air quality: projects/bme680.md
+    - Heating controller: projects/heating_control.md
     - SAMY: projects/samy.md
     - IKEA Bekant controller: projects/ikea_table.md
   - About me: about_me.md
