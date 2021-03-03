@@ -67,6 +67,7 @@ nav:
     - IKEA Bekant controller: projects/ikea_table.md
     - RP605 buck-boost: projects/rp605.md
     - battery powered temp sens: projects/lipo_powered_solar_temp_sens.md
+    - flush mounted relay: projects/flush_mounted_relay.md
   - About me: about_me.md
 
 

@@ -6,3 +6,4 @@
 - [CC2652RB heating controller](/projects/heating_control)
 - [CC2652RB battery powered temperature sensor](/projects/lipo_powered_solar_temp_sens)
 - [SAMY the nightlight](/projects/samy)
+- [flush mounted relay](/projects/flush_mounted_relay)

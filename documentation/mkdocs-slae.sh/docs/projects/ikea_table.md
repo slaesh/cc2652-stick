@@ -9,6 +9,7 @@ Sadly.. Kinda frozen for now =/
 But just join the list and let's see if we can push this topic!!
 
 <p>
+   <label for="waitinglist_emailinput">email</label>
    <input id="waitinglist_emailinput" type="text" />
    <button
    class="cta__button"
