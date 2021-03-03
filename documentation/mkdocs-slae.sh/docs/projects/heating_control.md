@@ -27,3 +27,9 @@ Parts:
 Will replace this beauty here .. ;D
 
 ![trq21](../images/trq21.jpg)
+
+finally the PCB's arrived and I tested the first one:
+
+![pcb top](../images/heating_control_pcb.jpg)
+
+![pcb bottom](../images/heating_control_pcb_bot.jpg)

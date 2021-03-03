@@ -411,8 +411,10 @@
     </div>
    
     <script>
-      function joinWatchlist() {
-        console.log('join!!! =)');
+      function joinWatchlist(listName, product) {
+        console.log('join!!! =)', listName);
+
+        if (!listName) return;
 
         const thisBtn = document.querySelector('#join_waitinglist');
         const wtlInpt = document.querySelector('#waitinglist_emailinput');
@@ -439,7 +441,7 @@
             }
         }
 
-        xhr.send(JSON.stringify({email}));
+        xhr.send(JSON.stringify({email,listName,product}));
 
         thisBtn.setAttribute("disabled", true);
         wtlInpt.setAttribute("disabled", true);
